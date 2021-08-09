@@ -83,6 +83,7 @@ class ItunesFragment : DaggerFragment(), Observer<ItunesContentState>,
             is ItunesContentState.OnLoadDetailPage -> {
                 if (activity is MainActivity){
                     (activity as MainActivity).supportFragmentManager.commit {
+                        this.setCustomAnimations(R.anim.anim_slide_in, R.anim.anim_fade_out, R.anim.anim_fade_in, R.anim.anim_slide_out)
                         this.addToBackStack(ItunesDetailFragment::class.java.simpleName)
                         this.add(R.id.fragment_container,ItunesDetailFragment.newInstance(
                            data = state.content.data!!),ItunesDetailFragment::class.java.simpleName)

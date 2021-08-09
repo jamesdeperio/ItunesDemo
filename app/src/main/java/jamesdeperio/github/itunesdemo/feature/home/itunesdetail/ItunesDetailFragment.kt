@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import dagger.android.support.DaggerFragment
 import jamesdeperio.github.itunesdemo.databinding.FragmentItunesDetailBinding
+import jamesdeperio.github.itunesdemo.feature.MainActivity
 import jamesdeperio.github.itunesdemo.model.ItunesData
 
 class ItunesDetailFragment: DaggerFragment() {
@@ -25,7 +26,17 @@ class ItunesDetailFragment: DaggerFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (activity is MainActivity){
+            (activity as MainActivity).showBackButton()
+        }
         data = Gson().fromJson(arguments?.getString(ItunesData::class.java.simpleName),ItunesData::class.java)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (activity is MainActivity){
+            (activity as MainActivity).hideBackButton()
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -36,7 +47,7 @@ class ItunesDetailFragment: DaggerFragment() {
             binding.tvTrackerName.text = data.trackName
             binding.tvPrice.text = "$${data.trackPrice}"
             binding.tvCollection.text = "${data.collectionName}"
-            binding.tvArtist.text = "$${data.artistName}"
+            binding.tvArtist.text = "${data.artistName}"
             binding.tvReleasedate.text = "${data.releaseDate}"
             binding.tvGenre.text = data.primaryGenreName
             binding.tvRating.text = "${data.contentAdvisoryRating}"

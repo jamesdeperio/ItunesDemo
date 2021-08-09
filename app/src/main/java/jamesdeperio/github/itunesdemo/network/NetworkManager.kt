@@ -13,12 +13,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class NetworkManager(context: Context) : RetrofitManager(context) {
-    //
-    val restRepository: RestRepository by lazy {
-        RestRepository(restService = create(RestService::class.java) as RestService)
-    }
-
-
     //region NETWORK CONFIGURATION
     override fun initBaseURL(): String = BuildConfig.BASE_URL
 

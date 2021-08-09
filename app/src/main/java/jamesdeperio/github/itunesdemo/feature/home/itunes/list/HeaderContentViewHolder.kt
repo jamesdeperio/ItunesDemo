@@ -3,6 +3,7 @@ package jamesdeperio.github.itunesdemo.feature.home.itunes.list
 import android.annotation.SuppressLint
 import android.view.View
 import jamesdeperio.github.itunesdemo.base.list.ViewHolder
+import jamesdeperio.github.itunesdemo.databinding.ItemListHeaderContentBinding
 
 class HeaderContentViewHolder(
         private val adapter: ContentContract
@@ -11,10 +12,9 @@ class HeaderContentViewHolder(
     //region VIEW BINDING
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(view: View, position: Int) {
-       // val binding = ListItemHeaderContentBinding.bind(view)
-       // val data = adapter.contents[position]
-       // binding.tvRedditPrefix.text = data.subRedditPrefixed
-      //   binding.tvSubreddit.text = data.subReddit
+        val binding = ItemListHeaderContentBinding.bind(view)
+        val content = adapter.contents[position]
+        binding.tvTitle.text = content.genre
 
     }
     //endregion

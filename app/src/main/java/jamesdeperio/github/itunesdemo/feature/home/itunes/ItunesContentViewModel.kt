@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import jamesdeperio.github.itunesdemo.feature.home.itunes.list.ItunesContent
 import jamesdeperio.github.itunesdemo.network.repository.RestRepository
 
 class ItunesContentViewModel(
@@ -16,20 +17,30 @@ class ItunesContentViewModel(
     val state:LiveData<ItunesContentState> = mState
 
     fun loadContent():Disposable
-    = Observable.just(true)
+            = restRepository.getItunesSearchResponse("star","au","movie")
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
-           // mState.value = PopularContentState.OnLoadItem(contents = it)
+            mState.value = ItunesContentState.OnLoadItem(contents = it, isFromCache = false)
         }, {
-          //  mState.value = PopularContentState.OnFailedToLoadItem(throwable = it)
+            mState.value = ItunesContentState.OnFailedToLoadItem(throwable = it)
+        })
+
+    fun loadContentFromCache():Disposable
+            = restRepository.getItunesSearchCache()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe({
+            mState.value = ItunesContentState.OnLoadItem(contents = it, isFromCache = true)
+        }, {
+            mState.value = ItunesContentState.OnNoLoadedCache
         })
 
 
 
 }
 sealed class ItunesContentState {
-    data class OnLoadItem(var contents:List<Any>): ItunesContentState()
+    data class OnLoadItem(var contents:List<ItunesContent>, var isFromCache:Boolean): ItunesContentState()
     data class OnFailedToLoadItem(var throwable: Throwable): ItunesContentState()
+    object OnNoLoadedCache: ItunesContentState()
 }
 
 class ItunesContentViewModelFactory(

@@ -9,7 +9,7 @@ import jamesdeperio.github.itunesdemo.di.scope.FragmentScope
 import jamesdeperio.github.itunesdemo.feature.home.itunes.list.HeaderContentViewHolder
 import jamesdeperio.github.itunesdemo.feature.home.itunes.list.ItemContentViewHolder
 import jamesdeperio.github.itunesdemo.feature.home.itunes.list.ItunesContentAdapter
-import jamesdeperio.github.itunesdemo.network.NetworkManager
+import jamesdeperio.github.itunesdemo.network.repository.RestRepository
 
 @Module
 class ItunesModule {
@@ -20,10 +20,10 @@ class ItunesModule {
     @FragmentScope
     @Provides
     fun providesViewModel(fragment: ItunesFragment,
-                          networkManager: NetworkManager):ItunesContentViewModel {
+                          restRepository: RestRepository):ItunesContentViewModel {
         val viewModel:ItunesContentViewModel by fragment.viewModels {
             ItunesContentViewModelFactory(
-                restRepository = networkManager.restRepository)
+                restRepository = restRepository)
         }
         return viewModel
     }

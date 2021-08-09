@@ -34,12 +34,17 @@ class ItunesContentViewModel(
             mState.value = ItunesContentState.OnNoLoadedCache
         })
 
+    fun loadDetailPage(content: ItunesContent) {
+        mState.value = ItunesContentState.OnLoadDetailPage(content)
+    }
 
 
 }
 sealed class ItunesContentState {
     data class OnLoadItem(var contents:List<ItunesContent>, var isFromCache:Boolean): ItunesContentState()
     data class OnFailedToLoadItem(var throwable: Throwable): ItunesContentState()
+    data class OnLoadDetailPage(var content: ItunesContent) : ItunesContentState()
+
     object OnNoLoadedCache: ItunesContentState()
 }
 

@@ -30,13 +30,13 @@ class ItunesModule {
 
     @FragmentScope
     @Provides
-    fun providesAdapter(): ItunesContentAdapter {
+    fun providesAdapter(viewModel: ItunesContentViewModel): ItunesContentAdapter {
         val adapter =  ItunesContentAdapter()
         val headerViewHolder = HeaderContentViewHolder(adapter = adapter)
         headerViewHolder.setContentView(R.layout.item_list_header_content)
         adapter.addViewHolder(viewHolder = headerViewHolder)  // index 0
 
-        val contentViewHolder = ItemContentViewHolder(adapter = adapter)
+        val contentViewHolder = ItemContentViewHolder(adapter = adapter, viewModel = viewModel)
         contentViewHolder.setContentView(R.layout.item_list_content)
         adapter.addViewHolder(viewHolder = contentViewHolder)  // index 1
 

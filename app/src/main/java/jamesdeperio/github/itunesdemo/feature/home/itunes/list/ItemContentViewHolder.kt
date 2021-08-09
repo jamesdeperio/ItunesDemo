@@ -4,10 +4,13 @@ import android.annotation.SuppressLint
 import android.view.View
 import com.bumptech.glide.Glide
 import jamesdeperio.github.itunesdemo.base.list.ViewHolder
+import jamesdeperio.github.itunesdemo.base.setOnThrottleClickListener
 import jamesdeperio.github.itunesdemo.databinding.ItemListContentBinding
+import jamesdeperio.github.itunesdemo.feature.home.itunes.ItunesContentViewModel
 
 class ItemContentViewHolder(
-        private val adapter: ContentContract
+    private val adapter: ContentContract,
+    private val viewModel: ItunesContentViewModel
 ) : ViewHolder() {
 
     //region VIEW BINDING
@@ -17,11 +20,14 @@ class ItemContentViewHolder(
         val content = adapter.contents[position]
 
         binding.tvTrackerName.text = content.data!!.trackName
-        binding.tvPrice.text = "Price:${content.data.trackPrice}"
+        binding.tvPrice.text = "Price: $${content.data.trackPrice}"
         Glide.with(view)
             .load(content.data.artworkUrl100)
            .into(binding.ivMedia)
 
+        binding.itemView.setOnThrottleClickListener {
+            viewModel.loadDetailPage(content= content)
+        }
     }
     //endregion
 }

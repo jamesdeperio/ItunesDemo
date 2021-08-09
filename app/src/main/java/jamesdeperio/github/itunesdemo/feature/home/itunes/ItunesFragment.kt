@@ -1,17 +1,22 @@
 package jamesdeperio.github.itunesdemo.feature.home.itunes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dagger.android.support.DaggerFragment
 import io.reactivex.disposables.CompositeDisposable
+import jamesdeperio.github.itunesdemo.R
 import jamesdeperio.github.itunesdemo.databinding.FragmentItunesBinding
+import jamesdeperio.github.itunesdemo.feature.MainActivity
 import jamesdeperio.github.itunesdemo.feature.home.itunes.list.ItunesContentAdapter
+import jamesdeperio.github.itunesdemo.feature.home.itunesdetail.ItunesDetailFragment
 import jamesdeperio.github.itunesdemo.util.NetworkUtil
 import javax.inject.Inject
 
@@ -51,6 +56,7 @@ class ItunesFragment : DaggerFragment(), Observer<ItunesContentState>,
     }
 
     override fun onChanged(state: ItunesContentState?) {
+        Log.d("ItunesContentState:"," $state")
         when(state) {
             is ItunesContentState.OnLoadItem -> {
                 if (state.isFromCache) {
@@ -73,6 +79,15 @@ class ItunesFragment : DaggerFragment(), Observer<ItunesContentState>,
             }
             is ItunesContentState.OnNoLoadedCache -> {
                 Toast.makeText(activity,"No data from cache!",Toast.LENGTH_LONG).show()
+            }
+            is ItunesContentState.OnLoadDetailPage -> {
+                if (activity is MainActivity){
+                    (activity as MainActivity).supportFragmentManager.commit {
+                        this.addToBackStack(ItunesDetailFragment::class.java.simpleName)
+                        this.add(R.id.fragment_container,ItunesDetailFragment.newInstance(
+                           data = state.content.data!!),ItunesDetailFragment::class.java.simpleName)
+                    }
+                }
             }
             else -> throw  RuntimeException("INVALID STATE")
         }

@@ -44,6 +44,9 @@ class RestRepository(
             return@map contentList
         }!!
 
+    /*
+     MAP DOMAIN MODEL to UI MODEL
+     */
     private fun sortedContents(response: ItunesSearchResponse): Collection<ItunesContent> {
         val contentList:MutableList<ItunesContent> = ArrayList()
         response.itunesData

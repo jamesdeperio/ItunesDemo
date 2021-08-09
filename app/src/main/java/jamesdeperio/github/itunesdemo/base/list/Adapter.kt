@@ -4,9 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
+/*
+Base Class for Recycler Adapter for creating multiple viewholder
+ */
 abstract class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     HasAdapterContract.Adapter {
     private val pocketViewHolderList = ArrayList<ViewHolder>()
+    private var selectedLayout: Int = 0
+
+    /*
+    Check what view holder to be shown
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         (0 until pocketViewHolderList.size)
             .filter {  viewType==it }
@@ -17,7 +25,6 @@ abstract class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
         return pocketViewHolderList[0].viewHolder
     }
 
-    private var selectedLayout: Int = 0
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
             = pocketViewHolderList[selectedLayout].onBindViewHolder(holder.itemView,position)

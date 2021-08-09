@@ -2,7 +2,9 @@ package jamesdeperio.github.itunesdemo.base
 import android.os.SystemClock
 import android.view.View
 import kotlin.math.abs
-
+/*
+Add throttle  to prevent multiple tap execution
+ */
 abstract class OnThrottleClickListener(private val delayInMillis: Long=750) : View.OnClickListener {
     private var prevTimestamp: Long = 0
     abstract fun onThrottleClick(v: View)

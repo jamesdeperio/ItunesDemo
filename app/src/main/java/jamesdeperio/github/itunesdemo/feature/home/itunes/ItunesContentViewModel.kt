@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import jamesdeperio.github.itunesdemo.feature.home.itunes.list.ItunesContent
@@ -16,6 +15,9 @@ class ItunesContentViewModel(
     private val mState = MutableLiveData<ItunesContentState>()
     val state:LiveData<ItunesContentState> = mState
 
+    /*
+     load content from api call
+     */
     fun loadContent():Disposable
             = restRepository.getItunesSearchResponse("star","au","movie")
         .observeOn(AndroidSchedulers.mainThread())
@@ -25,6 +27,9 @@ class ItunesContentViewModel(
             mState.value = ItunesContentState.OnFailedToLoadItem(throwable = it)
         })
 
+    /*
+   load content from cache
+   */
     fun loadContentFromCache():Disposable
             = restRepository.getItunesSearchCache()
         .observeOn(AndroidSchedulers.mainThread())
@@ -37,9 +42,11 @@ class ItunesContentViewModel(
     fun loadDetailPage(content: ItunesContent) {
         mState.value = ItunesContentState.OnLoadDetailPage(content)
     }
-
-
 }
+
+/*
+   state for itunes content
+   */
 sealed class ItunesContentState {
     data class OnLoadItem(var contents:List<ItunesContent>, var isFromCache:Boolean): ItunesContentState()
     data class OnFailedToLoadItem(var throwable: Throwable): ItunesContentState()
@@ -48,6 +55,9 @@ sealed class ItunesContentState {
     object OnNoLoadedCache: ItunesContentState()
 }
 
+/*
+   viewmodel factory to allow passing dependencies in constructor
+   */
 class ItunesContentViewModelFactory(
     private val restRepository: RestRepository
 ): ViewModelProvider.Factory {

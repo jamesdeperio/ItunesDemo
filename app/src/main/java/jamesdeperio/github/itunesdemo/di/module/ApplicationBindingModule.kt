@@ -12,7 +12,10 @@ import jamesdeperio.github.itunesdemo.network.dao.AppDatabase
 import jamesdeperio.github.itunesdemo.network.repository.RestRepository
 import jamesdeperio.github.itunesdemo.network.service.RestService
 
-
+/*
+Application binding...
+add app level dependencies here
+ */
 @Module
 abstract class ApplicationBindingModule {
     @Binds

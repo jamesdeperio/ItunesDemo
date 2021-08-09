@@ -23,16 +23,24 @@ import javax.inject.Inject
 
 class ItunesFragment : DaggerFragment(), Observer<ItunesContentState>,
     SwipeRefreshLayout.OnRefreshListener {
+    //region DEPENDENCY INJECTION
     @Inject lateinit var threadBag: CompositeDisposable
     @Inject lateinit var viewModel: ItunesContentViewModel
     @Inject lateinit var adapter: ItunesContentAdapter
-    private lateinit var binding: FragmentItunesBinding
+    //endregion
 
+    //region VARIABLE
+    private lateinit var binding: FragmentItunesBinding
+    //endregion
+
+    //region STATIC VARIABLE AND METHOD
     companion object {
         @JvmStatic
         fun newInstance() = ItunesFragment()
     }
+    //endregion
 
+    //region LIFECYCLE
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentItunesBinding.inflate(inflater, container, false)
 
@@ -54,7 +62,9 @@ class ItunesFragment : DaggerFragment(), Observer<ItunesContentState>,
         super.onDestroy()
         threadBag.dispose()
     }
+    //endregion
 
+    //region EVENT STATE
     override fun onChanged(state: ItunesContentState?) {
         Log.d("ItunesContentState:"," $state")
         when(state) {
@@ -93,9 +103,12 @@ class ItunesFragment : DaggerFragment(), Observer<ItunesContentState>,
             else -> throw  RuntimeException("INVALID STATE")
         }
     }
+    //endregion
 
+    //region USER ACTION
     override fun onRefresh() {
         binding.swipeRefreshLayout.isRefreshing = false
         viewModel.loadContent()
     }
+    //endregion
 }

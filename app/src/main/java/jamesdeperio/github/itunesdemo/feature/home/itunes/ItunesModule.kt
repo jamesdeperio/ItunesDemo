@@ -11,6 +11,9 @@ import jamesdeperio.github.itunesdemo.feature.home.itunes.list.ItemContentViewHo
 import jamesdeperio.github.itunesdemo.feature.home.itunes.list.ItunesContentAdapter
 import jamesdeperio.github.itunesdemo.network.repository.RestRepository
 
+/*
+ITUNES FRAGMENT DEPENDENCIES
+ */
 @Module
 class ItunesModule {
     @FragmentScope

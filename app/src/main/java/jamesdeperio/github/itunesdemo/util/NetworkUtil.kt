@@ -1,7 +1,6 @@
 package jamesdeperio.github.itunesdemo.util
 
 import android.util.MalformedJsonException
-import jamesdeperio.github.itunesdemo.BuildConfig
 import java.io.EOFException
 import java.io.IOException
 import java.io.InterruptedIOException

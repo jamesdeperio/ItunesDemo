@@ -8,6 +8,9 @@ import jamesdeperio.github.itunesdemo.base.setOnThrottleClickListener
 import jamesdeperio.github.itunesdemo.databinding.ItemListContentBinding
 import jamesdeperio.github.itunesdemo.feature.home.itunes.ItunesContentViewModel
 
+/*
+home content layout
+ */
 class ItemContentViewHolder(
     private val adapter: ContentContract,
     private val viewModel: ItunesContentViewModel

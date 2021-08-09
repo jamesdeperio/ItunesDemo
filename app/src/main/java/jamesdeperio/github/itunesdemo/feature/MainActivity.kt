@@ -10,8 +10,11 @@ import jamesdeperio.github.itunesdemo.databinding.ActivityMainBinding
 import jamesdeperio.github.itunesdemo.feature.home.itunes.ItunesFragment
 
 class MainActivity : DaggerAppCompatActivity() {
+    //region VARIABLE
     private lateinit var binding: ActivityMainBinding
+    //endregion
 
+    //region LIFECYCLE
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -21,7 +24,9 @@ class MainActivity : DaggerAppCompatActivity() {
             super.onBackPressed()
         }
     }
+    //endregion
 
+    //region UI MODIFICATION METHOD
     private fun displayHomePage() {
         supportFragmentManager.commit {
             this.replace(R.id.fragment_container,ItunesFragment.newInstance(),ItunesFragment::class.simpleName)
@@ -35,5 +40,6 @@ class MainActivity : DaggerAppCompatActivity() {
     fun showBackButton() {
         binding.ivBack.visibility = View.VISIBLE
     }
+    //endregion
 
 }

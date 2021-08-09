@@ -8,6 +8,10 @@ import jamesdeperio.github.itunesdemo.feature.home.itunes.ItunesFragment
 import jamesdeperio.github.itunesdemo.feature.home.itunes.ItunesModule
 import jamesdeperio.github.itunesdemo.feature.home.itunesdetail.ItunesDetailFragment
 
+/*
+Fragment binding...
+add your dagger fragment here
+ */
 @Module(includes = [AndroidSupportInjectionModule::class])
 abstract class FragmentBindingModule {
     @FragmentScope

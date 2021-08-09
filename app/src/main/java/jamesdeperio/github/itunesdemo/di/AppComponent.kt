@@ -11,6 +11,9 @@ import jamesdeperio.github.itunesdemo.di.module.ApplicationBindingModule
 import jamesdeperio.github.itunesdemo.di.module.FragmentBindingModule
 import jamesdeperio.github.itunesdemo.di.scope.ApplicationScope
 
+/*
+dependency injection builder
+ */
 @ApplicationScope
 @Component(modules = [
     AndroidSupportInjectionModule::class,

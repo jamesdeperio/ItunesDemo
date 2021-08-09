@@ -14,6 +14,9 @@ class ItunesContentAdapter: Adapter(), ContentContract {
 
     override fun getItemCount(): Int = contents.size
 
+    /*
+        add the condition what viewholder to show based on viewholder index
+    */
     override fun viewTypeCondition(position: Int): Int = when {
         contents[position].isHeader -> VIEWHOLDER_HEADER_INDEX
         else -> VIEWHOLDER_CONTENT_INDEX
@@ -22,6 +25,9 @@ class ItunesContentAdapter: Adapter(), ContentContract {
 
 }
 
+/*
+     UI Model for ItunesContent Adapter
+ */
 data class ItunesContent(
     val id: Int =0,
     val isHeader:Boolean = false,

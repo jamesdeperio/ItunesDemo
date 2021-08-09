@@ -13,8 +13,12 @@ import jamesdeperio.github.itunesdemo.feature.MainActivity
 import jamesdeperio.github.itunesdemo.model.ItunesData
 
 class ItunesDetailFragment: DaggerFragment() {
+    //region VARIABLE
     private lateinit var binding: FragmentItunesDetailBinding
     private lateinit var data: ItunesData
+    //endregion
+
+    //region STATIC VARIABLE AND METHOD
     companion object {
         @JvmStatic
         fun newInstance(data: ItunesData) = ItunesDetailFragment().apply {
@@ -23,7 +27,9 @@ class ItunesDetailFragment: DaggerFragment() {
             }
         }
     }
+    //endregion
 
+    //region LIFECYCLE
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (activity is MainActivity){
@@ -59,4 +65,5 @@ class ItunesDetailFragment: DaggerFragment() {
 
         return binding.root
     }
+    //endregion
 }

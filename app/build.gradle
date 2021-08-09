@@ -57,9 +57,6 @@ dependencies {
 
     /* UI */
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'com.github.delight-im:Android-AdvancedWebView:v3.2.1'
-    implementation 'com.airbnb.android:lottie:3.7.1'
-    implementation 'com.github.jamesdeperio:PocketLib:3.1.1'
 
     /* ANDROID X */
     implementation 'androidx.core:core-ktx:1.6.0'

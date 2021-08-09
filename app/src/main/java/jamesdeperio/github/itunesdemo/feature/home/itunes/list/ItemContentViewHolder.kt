@@ -3,6 +3,7 @@ package jamesdeperio.github.itunesdemo.feature.home.itunes.list
 import android.annotation.SuppressLint
 import android.view.View
 import com.bumptech.glide.Glide
+import jamesdeperio.github.itunesdemo.R
 import jamesdeperio.github.itunesdemo.base.list.ViewHolder
 import jamesdeperio.github.itunesdemo.base.setOnThrottleClickListener
 import jamesdeperio.github.itunesdemo.databinding.ItemListContentBinding
@@ -26,6 +27,7 @@ class ItemContentViewHolder(
         binding.tvPrice.text = "Price: $${content.data.trackPrice}"
         Glide.with(view)
             .load(content.data.artworkUrl100)
+            .error(R.drawable.placeholder)
            .into(binding.ivMedia)
 
         binding.itemView.setOnThrottleClickListener {

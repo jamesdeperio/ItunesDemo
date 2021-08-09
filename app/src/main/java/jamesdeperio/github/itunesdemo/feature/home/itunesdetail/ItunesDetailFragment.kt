@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import dagger.android.support.DaggerFragment
+import jamesdeperio.github.itunesdemo.R
 import jamesdeperio.github.itunesdemo.databinding.FragmentItunesDetailBinding
 import jamesdeperio.github.itunesdemo.feature.MainActivity
 import jamesdeperio.github.itunesdemo.model.ItunesData
@@ -59,6 +60,7 @@ class ItunesDetailFragment: DaggerFragment() {
             binding.tvRating.text = "${data.contentAdvisoryRating}"
             Glide.with(requireContext())
                 .load(data.artworkUrl100)
+                .error(R.drawable.placeholder)
                 .into(binding.ivMedia)
 
         }
